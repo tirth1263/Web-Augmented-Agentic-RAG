@@ -11,6 +11,25 @@ persisted server-side.
 from __future__ import annotations
 
 import os
+import sys
+
+# --- Must run before anything imports crewai --------------------------------- #
+# crewai pulls in chromadb, which refuses to load against sqlite3 < 3.35. Several
+# hosts (Streamlit Community Cloud among them) still ship an older system sqlite,
+# so swap in the modern bundled build when it is installed. Linux-only wheel, so
+# a missing module here is normal on Windows/macOS.
+try:  # pragma: no cover - environment dependent
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
+# Keep agent runs from blocking on CrewAI's outbound telemetry in sandboxed
+# hosts. Left narrow on purpose: AgentOps rides on OpenTelemetry, so the SDK as
+# a whole must stay enabled for optional tracing to work.
+os.environ.setdefault("CREWAI_TELEMETRY_OPT_OUT", "true")
+# ----------------------------------------------------------------------------- #
+
 import re
 import uuid
 

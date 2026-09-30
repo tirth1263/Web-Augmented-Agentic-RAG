@@ -197,9 +197,17 @@ fastest path and is free.
 1. Go to [share.streamlit.io](https://share.streamlit.io/) and sign in with GitHub.
 2. Click **Create app → Deploy a public app from GitHub**.
 3. Repository `tirth1263/Web-Augmented-Agentic-RAG`, branch `main`, main file `main.py`.
-4. *(Optional)* Add keys under **Advanced settings → Secrets** using the format in
+4. Open **Advanced settings** and set **Python version to 3.12**
+   (CrewAI requires ≥ 3.10 and < 3.14).
+5. *(Optional)* Add keys under **Advanced settings → Secrets** using the format in
    [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example).
-5. Click **Deploy**. First build takes a few minutes while CrewAI installs.
+6. Click **Deploy**. The first build takes several minutes — CrewAI has a large
+   dependency tree. Let it finish rather than cancelling.
+
+> 🧩 **Already handled for you:** CrewAI pulls in `chromadb`, which refuses to load
+> against `sqlite3 < 3.35` — the single most common cause of a failed Streamlit Cloud
+> deploy. `main.py` swaps in `pysqlite3-binary` before any CrewAI import, so this build
+> works out of the box.
 
 > ⚠️ **Leave secrets empty for a public demo.** With no secrets set, every visitor supplies
 > their own keys in the sidebar — so your OpenAI quota is never spent by strangers.

@@ -20,3 +20,7 @@ agentops==0.4.21
 
 # Config
 python-dotenv==1.2.3
+
+# Modern sqlite3 for hosts whose system build predates 3.35 (chromadb, pulled
+# in by crewai, requires it). Linux-only wheel; ignored elsewhere.
+pysqlite3-binary==0.5.4.post2; sys_platform == "linux"
