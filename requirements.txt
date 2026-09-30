@@ -1,0 +1,22 @@
+# Core application dependencies
+streamlit==1.64.0
+
+# Agent orchestration
+crewai==1.15.23
+crewai-tools==1.15.23
+
+# Web search (required explicitly: crewai-tools does not install it for you)
+exa-py==2.23.0
+
+# Vector store + embeddings
+qdrant-client==1.19.1
+openai==2.54.0
+
+# PDF text extraction
+pdfplumber==0.11.10
+
+# Observability (optional at runtime)
+agentops==0.4.21
+
+# Config
+python-dotenv==1.2.3

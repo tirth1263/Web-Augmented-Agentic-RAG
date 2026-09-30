@@ -1,0 +1,27 @@
+[project]
+name = "web-augmented-agentic-rag"
+version = "1.0.0"
+description = "Agentic RAG that answers from your PDF and the live web, orchestrated by a CrewAI multi-agent team."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "tirth1263" }]
+keywords = ["rag", "crewai", "agents", "qdrant", "exa", "streamlit", "llm"]
+
+dependencies = [
+    "streamlit==1.64.0",
+    "crewai==1.15.23",
+    "crewai-tools==1.15.23",
+    "exa-py==2.23.0",
+    "qdrant-client==1.19.1",
+    "openai==2.54.0",
+    "pdfplumber==0.11.10",
+    "agentops==0.4.21",
+    "python-dotenv==1.2.3",
+]
+
+[project.urls]
+Repository = "https://github.com/tirth1263/Web-Augmented-Agentic-RAG"
+
+[tool.uv]
+package = false
